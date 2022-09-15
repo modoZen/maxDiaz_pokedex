@@ -3,13 +3,27 @@ import { getPokemons } from './api'
 import './App.css'
 
 function App() {
+  const [pokemons, setPokemons] = useState([]);
+
   useEffect(()=>{
-    getPokemons().then(data=>{console.info(data)})
+    getPokemons().then(pokemonsList=>{setPokemons(pokemonsList)})
   },[])
 
   return (
     <div className="App">
-      pokemon
+      {pokemons.map(({ id, name, img})=>(
+        <div key={id}>
+          <div>
+            <img 
+              src={ img }
+              alt={ name }
+              style={{ height: 75 }}
+            />
+          </div>
+          <div>{id}</div>
+          <div>{name}</div>
+        </div>
+      ))}
     </div>
   )
 }
