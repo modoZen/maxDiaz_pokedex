@@ -4,13 +4,19 @@ import './App.css'
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(()=>{
-    getPokemons().then(pokemonsList=>{setPokemons(pokemonsList)})
+    setLoading(true)
+    getPokemons().then(pokemonsList=>{
+      setPokemons(pokemonsList)
+      setLoading(false)
+    })
   },[])
 
   return (
     <div className="App">
+      {loading && <div>Cargando...  </div>}
       {pokemons.map(({ id, name, img})=>(
         <div key={id}>
           <div>
