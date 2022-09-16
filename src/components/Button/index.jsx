@@ -1,9 +1,10 @@
 import React from 'react'
+import './styles.sass'
 
-export const Button = ({ text, onClick, disabled = false }) => {
+export const Button = ({ onClick, disabled = false, children }) => {
   return (
-    <button onClick={onClick} disabled={disabled}>
-        {text}
+    <button className='button' onClick={onClick} disabled={disabled}>
+        {children}
     </button>
   )
 }

@@ -50,16 +50,18 @@ function App() {
         ))}
       </div>
       <div>
-        <Button 
-          text={'Atras'}      
+        <Button   
           onClick={prevPage} 
           disabled={ currentPage === 0 } 
-        />
+        >
+          Atras
+        </Button>
         <Button 
-          text={'Siguiente'}  
           onClick={nextPage} 
           disabled={!(pokemonsSearched.length > currentPage + 4) } 
-        />
+        >
+          Siguiente
+        </Button>
       </div>
     </div>
   )
