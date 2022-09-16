@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Loader } from './components/Loader';
+import { CardPokemon } from './components/CardPokemon';
+import { Button } from './components/Button';
 import { usePagination } from './hooks/usePaginacion';
 import { usePokemons } from './hooks/usePokemons';
-import './App.css'
-import { Button } from './components/Button';
+import './App.sass'
 
 function App() {
 
@@ -19,37 +20,27 @@ function App() {
   const pokemonsSearched = pokemons.filter(pokemon=> pokemon.name.toLowerCase().includes(searched.toLowerCase()));
   const pokemonsPaged = pokemonsSearched.slice(currentPage, currentPage + 4);
   
-  console.log(pokemonsPaged);
-
   return (
     <div className="App">
       {loading && <Loader />}
-      <div>
+      <div className='App__title'>
         Listado de Pokemon
       </div>
-      <div>
+      <div className='App__search'>
         <input 
           type="text"
           value={searched}
           onChange={handlerSearch}
+          placeholder='Buscar'
+          className='App__searchInput'
         />
       </div>
-      <div>
+      <div className='App__cardPokemonList'>
         {pokemonsPaged.map(({ id, name, img})=>(
-          <div key={id}>
-            <div>
-              <img 
-                src={ img }
-                alt={ name }
-                style={{ height: 75 }}
-              />
-            </div>
-            <div>{id}</div>
-            <div>{name}</div>
-          </div>
+          <CardPokemon key={id} id={id} name={name} img={img} />
         ))}
       </div>
-      <div>
+      <div className='App__footer'>
         <Button   
           onClick={prevPage} 
           disabled={ currentPage === 0 } 
