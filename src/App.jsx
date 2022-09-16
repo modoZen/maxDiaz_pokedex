@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getPokemons } from './api'
 import './App.css'
 import { Loader } from './components/Loader';
+import { usePagination } from './hooks/usePaginacion';
 
 const usePokemons = () => {
   const [pokemons, setPokemons]       = useState([]);
@@ -16,19 +17,6 @@ const usePokemons = () => {
   return {
     pokemons,
     loading
-  }
-}
-
-const usePagination = () => {
-  const [currentPage, setCurrentPage] = useState(0);
-  const nextPage = () => { setCurrentPage(currentPage + 4); }
-  const prevPage = () => { setCurrentPage(currentPage - 4); }
-
-  return {
-    currentPage,
-    setCurrentPage,
-    nextPage,
-    prevPage
   }
 }
 
