@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getPokemons } from './api'
 import './App.css'
+import { Loader } from './components/Loader';
 
 function App() {
   const [pokemons, setPokemons] = useState([]);
@@ -16,7 +17,7 @@ function App() {
 
   return (
     <div className="App">
-      {loading && <div>Cargando...  </div>}
+      {loading && <Loader />}
       {pokemons.map(({ id, name, img})=>(
         <div key={id}>
           <div>
