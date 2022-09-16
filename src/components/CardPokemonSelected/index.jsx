@@ -39,7 +39,7 @@ export const CardPokemonSelected = ({id}) => {
                 <div className='cardPokemonSelected__spriteTitle'>Sprites</div>
                 <div className='cardPokemonSelected__spriteList'>
                     <div className='cardPokemonSelected__spriteElement'>
-                        <img className='cardPokemonSelected__sprite' src={pokemonSelected.sprites?.front_default} />
+                        <img className='cardPokemonSelected__spriteImg' src={pokemonSelected.sprites?.front_default} />
                     </div>
                     <div className='cardPokemonSelected__spriteElement'>
                         <img className='cardPokemonSelected__spriteImg' src={pokemonSelected.sprites?.back_default} />
