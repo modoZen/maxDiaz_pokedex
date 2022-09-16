@@ -2,9 +2,10 @@ import { useState } from 'react'
 import { Loader } from './components/Loader';
 import { CardPokemon } from './components/CardPokemon';
 import { Button } from './components/Button';
-import { CardPokemonSelected } from './components/cardPokemonSelected';
+import { CardPokemonSelected } from './components/CardPokemonSelected';
 import { usePagination } from './hooks/usePaginacion';
 import { usePokemons } from './hooks/usePokemons';
+import lupa from './assets/search.svg'
 import './App.sass'
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         Listado de Pokemon
       </div>
       <div className='App__search'>
+        <img className='App__searchIcon' src={lupa} alt="lupa" />
         <input 
           type="text"
           value={searched}
