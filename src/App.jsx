@@ -3,12 +3,9 @@ import { getPokemons } from './api'
 import './App.css'
 import { Loader } from './components/Loader';
 
-function App() {
+const usePokemons = () => {
   const [pokemons, setPokemons]       = useState([]);
   const [loading, setLoading]         = useState(true);
-  const [currentPage, setCurrentPage] = useState(0);
-  const [searched, setSearched] = useState('');
-
   useEffect(()=>{
     getPokemons().then(pokemonsList=>{
       setPokemons(pokemonsList)
@@ -16,27 +13,47 @@ function App() {
     })
   },[]);
 
-  const pokemonsSearched = pokemons.filter(pokemon=> pokemon.name.toLowerCase().includes(searched.toLowerCase()));
-  const pokemonsPaged = pokemonsSearched.slice(currentPage, currentPage + 4);
-  
+  return {
+    pokemons,
+    loading
+  }
+}
+
+const usePagination = () => {
+  const [currentPage, setCurrentPage] = useState(0);
+  const nextPage = () => { setCurrentPage(currentPage + 4); }
+  const prevPage = () => { setCurrentPage(currentPage - 4); }
+
+  return {
+    currentPage,
+    setCurrentPage,
+    nextPage,
+    prevPage
+  }
+}
+
+function App() {
+
+  const { pokemons, loading } = usePokemons();
+  const { currentPage, prevPage, nextPage, setCurrentPage } = usePagination();
+
+  const [searched, setSearched] = useState('');
   const handlerSearch = (event)=>{
     setCurrentPage(0);
     setSearched(event.target.value);
   }
 
+  const pokemonsSearched = pokemons.filter(pokemon=> pokemon.name.toLowerCase().includes(searched.toLowerCase()));
+  const pokemonsPaged = pokemonsSearched.slice(currentPage, currentPage + 4);
+  
   console.log(pokemonsPaged);
-
-
-  const nextPage = () => {
-    setCurrentPage(currentPage + 4);
-  }
-
-  const prevPage = () => {
-    setCurrentPage(currentPage - 4);
-  }
 
   return (
     <div className="App">
+      {loading && <Loader />}
+      <div>
+        Listado de Pokemon
+      </div>
       <div>
         <input 
           type="text"
@@ -45,7 +62,6 @@ function App() {
         />
       </div>
       <div>
-        {loading && <Loader />}
         {pokemonsPaged.map(({ id, name, img})=>(
           <div key={id}>
             <div>
