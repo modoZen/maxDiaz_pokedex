@@ -16,11 +16,11 @@ export const CardPokemonSelected = ({id}) => {
         <div className='cardPokemonSelected'>
             <img 
                 src={ pokemonSelected.sprites?.other.home.front_default }
-                alt={ name }
+                alt={ pokemonSelected.name }
                 className='cardPokemonSelected__mainImg'
             />
-            <div className=''># {pokemonSelected?.id}</div>
-            <div className=''>{pokemonSelected?.name}</div>
+            <div className='cardPokemonSelected__id'># {pokemonSelected?.id}</div>
+            <div className='cardPokemonSelected__name'>{pokemonSelected?.name}</div>
             <div>
                 <div>Types</div>
                 <div>
