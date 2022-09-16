@@ -3,6 +3,7 @@ import { Loader } from './components/Loader';
 import { usePagination } from './hooks/usePaginacion';
 import { usePokemons } from './hooks/usePokemons';
 import './App.css'
+import { Button } from './components/Button';
 
 function App() {
 
@@ -49,18 +50,16 @@ function App() {
         ))}
       </div>
       <div>
-        <button 
-          onClick={prevPage}
+        <Button 
+          text={'Atras'}      
+          onClick={prevPage} 
           disabled={ currentPage === 0 } 
-        >
-          Atras
-        </button>
-        <button 
-          onClick={nextPage}
-          disabled={!(pokemonsSearched.length > currentPage + 4) }
-        >
-          Siguiente
-        </button>
+        />
+        <Button 
+          text={'Siguiente'}  
+          onClick={nextPage} 
+          disabled={!(pokemonsSearched.length > currentPage + 4) } 
+        />
       </div>
     </div>
   )
