@@ -4,21 +4,23 @@ import './App.css'
 import { Loader } from './components/Loader';
 
 function App() {
-  const [pokemons, setPokemons] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [pokemons, setPokemons]       = useState([]);
+  const [loading, setLoading]         = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(()=>{
-    setLoading(true)
     getPokemons().then(pokemonsList=>{
       setPokemons(pokemonsList)
       setLoading(false)
     })
-  },[])
+  },[]);
+
+  const pokemonFiltered = pokemons.slice(currentPage, currentPage + 4);
 
   return (
     <div className="App">
       {loading && <Loader />}
-      {pokemons.map(({ id, name, img})=>(
+      {pokemonFiltered.map(({ id, name, img})=>(
         <div key={id}>
           <div>
             <img 
@@ -31,6 +33,18 @@ function App() {
           <div>{name}</div>
         </div>
       ))}
+      <div>
+        <button 
+          onClick={()=>{setCurrentPage((value)=>value-5)}} 
+        >
+          Atras
+        </button>
+        <button 
+          onClick={()=>{setCurrentPage((value)=>value+5)}}
+        >
+          Siguiente
+        </button>
+      </div>
     </div>
   )
 }
