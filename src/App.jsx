@@ -16,17 +16,24 @@ function App() {
     })
   },[]);
 
-  const pokemonFiltered = () =>{
-    return pokemons
-    .filter(pokemon=> pokemon.name.toLowerCase().includes(searched.toLowerCase()))
-    .slice(currentPage, currentPage + 4);
-  }
+  const pokemonsSearched = pokemons.filter(pokemon=> pokemon.name.toLowerCase().includes(searched.toLowerCase()));
+  const pokemonsPaged = pokemonsSearched.slice(currentPage, currentPage + 4);
   
   const handlerSearch = (event)=>{
+    setCurrentPage(0);
     setSearched(event.target.value);
   }
 
-  console.log(pokemonFiltered())
+  console.log(pokemonsPaged);
+
+
+  const nextPage = () => {
+    setCurrentPage(currentPage + 4);
+  }
+
+  const prevPage = () => {
+    setCurrentPage(currentPage - 4);
+  }
 
   return (
     <div className="App">
@@ -39,7 +46,7 @@ function App() {
       </div>
       <div>
         {loading && <Loader />}
-        {pokemonFiltered().map(({ id, name, img})=>(
+        {pokemonsPaged.map(({ id, name, img})=>(
           <div key={id}>
             <div>
               <img 
@@ -55,12 +62,14 @@ function App() {
       </div>
       <div>
         <button 
-          onClick={()=>{setCurrentPage((value)=>value-4)}} 
+          onClick={prevPage}
+          disabled={ currentPage === 0 } 
         >
           Atras
         </button>
         <button 
-          onClick={()=>{setCurrentPage((value)=>value+4)}}
+          onClick={nextPage}
+          disabled={!(pokemonsSearched.length > currentPage + 4) }
         >
           Siguiente
         </button>
