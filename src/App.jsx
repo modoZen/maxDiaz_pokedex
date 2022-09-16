@@ -1,24 +1,8 @@
-import { useEffect, useState } from 'react'
-import { getPokemons } from './api'
-import './App.css'
+import { useState } from 'react'
 import { Loader } from './components/Loader';
 import { usePagination } from './hooks/usePaginacion';
-
-const usePokemons = () => {
-  const [pokemons, setPokemons]       = useState([]);
-  const [loading, setLoading]         = useState(true);
-  useEffect(()=>{
-    getPokemons().then(pokemonsList=>{
-      setPokemons(pokemonsList)
-      setLoading(false)
-    })
-  },[]);
-
-  return {
-    pokemons,
-    loading
-  }
-}
+import { usePokemons } from './hooks/usePokemons';
+import './App.css'
 
 function App() {
 
