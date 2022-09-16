@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Loader } from './components/Loader';
 import { CardPokemon } from './components/CardPokemon';
 import { Button } from './components/Button';
+import { CardPokemonSelected } from './components/cardPokemonSelected';
 import { usePagination } from './hooks/usePaginacion';
 import { usePokemons } from './hooks/usePokemons';
 import './App.sass'
@@ -19,6 +20,12 @@ function App() {
 
   const pokemonsSearched = pokemons.filter(pokemon=> pokemon.name.toLowerCase().includes(searched.toLowerCase()));
   const pokemonsPaged = pokemonsSearched.slice(currentPage, currentPage + 4);
+
+  const [pokemonSelectedId, setPokemonSelectedId] = useState(1)
+
+  const handlerPokemonSelected = (id) => {
+    setPokemonSelectedId(id)
+  }
   
   return (
     <div className="App">
@@ -35,10 +42,13 @@ function App() {
           className='App__searchInput'
         />
       </div>
-      <div className='App__cardPokemonList'>
-        {pokemonsPaged.map(({ id, name, img})=>(
-          <CardPokemon key={id} id={id} name={name} img={img} />
-        ))}
+      <div className='App__cardPokemonSection'>
+        <div className='App__cardPokemonList'>
+          {pokemonsPaged.map(({ id, name, img})=>(
+            <CardPokemon key={id} id={id} name={name} img={img} onClick={handlerPokemonSelected} />
+          ))}
+        </div>
+        <CardPokemonSelected id={pokemonSelectedId} />
       </div>
       <div className='App__footer'>
         <Button   
