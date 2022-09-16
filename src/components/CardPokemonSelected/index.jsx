@@ -21,31 +21,43 @@ export const CardPokemonSelected = ({id}) => {
             />
             <div className='cardPokemonSelected__id'># {pokemonSelected?.id}</div>
             <div className='cardPokemonSelected__name'>{pokemonSelected?.name}</div>
-            <div>
-                <div>Types</div>
-                <div>
-                    {pokemonSelected?.types?.map(type=>type.type.name)}
+            <div className='cardPokemonSelected__typeScetion'>
+                <div className='cardPokemonSelected__typeTitle'>Types</div>
+                <div className='cardPokemonSelected__typeList'>
+                    {pokemonSelected?.types?.map(type=>(
+                        <div>{type.type.name}</div>
+                    ))}
                 </div>
             </div>
             <div>
-                <div>Peso</div>
+                <div className='cardPokemonSelected__weitghTitle'>Peso</div>
                 <div>
                     {pokemonSelected?.weight}
                 </div>
             </div>
             <div>
-                <div>Sprites</div>
-                <div>
-                    <img src={pokemonSelected.sprites?.front_default} />
-                    <img src={pokemonSelected.sprites?.back_default} />
-                    <img src={pokemonSelected.sprites?.front_shiny} />
-                    <img src={pokemonSelected.sprites?.back_shiny} />
+                <div className='cardPokemonSelected__spriteTitle'>Sprites</div>
+                <div className='cardPokemonSelected__spriteList'>
+                    <div className='cardPokemonSelected__spriteElement'>
+                        <img className='cardPokemonSelected__sprite' src={pokemonSelected.sprites?.front_default} />
+                    </div>
+                    <div className='cardPokemonSelected__spriteElement'>
+                        <img className='cardPokemonSelected__spriteImg' src={pokemonSelected.sprites?.back_default} />
+                    </div>
+                    <div className='cardPokemonSelected__spriteElement'>
+                        <img className='cardPokemonSelected__spriteImg' src={pokemonSelected.sprites?.front_shiny} />
+                    </div>
+                    <div className='cardPokemonSelected__spriteElement'>
+                        <img className='cardPokemonSelected__spriteImg' src={pokemonSelected.sprites?.back_shiny} />
+                    </div>
                 </div>
             </div>
             <div>
-                <div>Movimientos</div>
-                <div>
-                    {pokemonSelected?.moves?.slice(0,4).map(move=>move.move.name)}
+                <div className='cardPokemonSelected__moveTitle'>Movimientos</div>
+                <div className='cardPokemonSelected__moveList'>
+                    {pokemonSelected?.moves?.slice(0,4).map(move=>(
+                        <div>{move.move.name}</div>
+                    ))}
                 </div>
             </div>
         </div>
